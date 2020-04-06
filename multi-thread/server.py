@@ -7,24 +7,27 @@ def handlechild(clientsock):
 	print('New child {}'.format(threading.currentThread().getName()))
 	print('Got the connection from {}'.format(clientsock.getpeername()))
 	while 1:
-		data=clientsock.recv(2096)
-		if data == 'q' or data == 'Q':
+		# clientsock, address = socket.accept()
+		data = clientsock.recv(2096)		
+		if data:
+			clientsock.send(data)
+			print('{} send: {}'.format(clientsock.getpeername(), data))
+		elif data == 'q' or data == 'Q':
 			print('Client {} was quit'.format(clientsock.getpeername()))
 			clientsock.close()
 			break
-		print('{} send: {}'.format(clientsock.getpeername(), data))
-		clientsock.send(data)
-
+			
 try:
 	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-	s.bind(('localhost',5300))
+	s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+	s.bind(('localhost', 5300))
 	s.listen(5)
 	print('Waiting for connection on port 5200')
 
-except socket.error, (value, message):
+except socket.error as message:
 	if s:
 		s.close()
-	print ('Couldn\'t open the socket {}',message)
+	print ('Couldn\'t open the socket {}'.format(message))
 	sys.exit(1)
 
 while 1:
