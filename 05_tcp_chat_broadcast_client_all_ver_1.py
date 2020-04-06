@@ -36,7 +36,7 @@ def recv_msg(sock):
 
 def chat_client():
 	if len(sys.argv) < 3:
-		print('Usage : python chat_client.py hostname port')
+		print('Usage: python chat_client.py hostname port')
 		sys.exit()
 
 	host = sys.argv[1]

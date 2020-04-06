@@ -3,10 +3,10 @@ import socket
 import errno
 
 # deklarasi variabel
-IP='' # atau bisa digunakan IP='0.0.0.0.0'
-PORT=77 # cek port yg tersedia menggunakan netstat
+IP = '' # atau bisa digunakan IP = '0.0.0.0.0'
+PORT = 77 # cek port yg tersedia menggunakan netstat
 
-sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 try:
     '''
@@ -16,7 +16,7 @@ try:
     cek pakai netstat
     '''
     sock.bind((IP,PORT))
-    print 'Server binding ke %s : %s' % (IP,PORT)
+    print('Server binding ke {} : {}'.format(IP,PORT))
 
     '''
     listen socket
@@ -25,7 +25,7 @@ try:
     harusnya 100 sudah cukup. 
     '''
     sock.listen(100)
-    print 'Server sedang listening...'
+    print('Server sedang listening...')
 
     '''
     saat program server menerima koneksi dari client
@@ -41,7 +41,7 @@ try:
             sapa terlebih dahulu client nya
             '''
             con.send('Selamat datang di Server kami')
-            print 'Pesan dari client: %s' % (con.recv(1024))
+            print('Pesan dari client: {}'.format(con.recv(1024)))
         
             '''
             apabila terjadi error, maka akan dialihkan
@@ -49,20 +49,20 @@ try:
             '''
         except socket.error as e:
             if e.errno == errno.ECONNREFUSED:
-                print 'gagal melakukan koneksi balik'
+                print('gagal melakukan koneksi balik')
             elif e.errno ==  errno.ECONNRESET:
-                print 'koneksi ke client terputus'
+                print('koneksi ke client terputus')
             elif e.errno == errno.ETIMEDOUT:
-                print 'koneksi timeout!'
+                print('koneksi timeout!')
             else:
-                print e
+                print(e)
             '''
             except ini cuma berlaku untuk posix system
             entah kenapa cmd windows tidak merespon
             apabila user menekan Ctrl+C
             '''
         except KeyboardInterrupt:
-            print 'Server dimatikan!\n'
+            print('Server dimatikan!\n')
             con.close()
             break
 
@@ -79,4 +79,4 @@ try:
     ''' 
 except socket.error as e :
     if e.errno == errno.EADDRINUSE:
-        print 'gagal bind, port tidak tersedia atau digunakan oleh program lain'
+        print('gagal bind, port tidak tersedia atau digunakan oleh program lain')

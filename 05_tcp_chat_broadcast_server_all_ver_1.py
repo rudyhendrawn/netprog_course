@@ -14,7 +14,7 @@ def chat_server():
 	# add server socket object to the list of readable connections
 	SOCKET_LIST.append(server_socket)
 
-	print('Chat server started on port ' + str(PORT))
+	print('Chat server started on port {}'.format(str(PORT)))
 
 	while True:
 		# get the list sockets which are ready to be read through select
@@ -26,9 +26,9 @@ def chat_server():
 			if sock == server_socket:
 				sockfd, addr = server_socket.accept()
 				SOCKET_LIST.append(sockfd)
-				print('Client (%s, %s) connected' % addr)
+				print('Client ({}, {}) connected'.format(addr))
 
-				broadcast(server_socket, sockfd, "[%s:%s] entered our chatting room\n" % addr)
+				broadcast(server_socket, sockfd, '[{}:{}] entered our chatting room\n'.format(addr))
 
 				# a message from a client, not a new connection
 			else:
@@ -38,14 +38,14 @@ def chat_server():
 					data = sock.recv(RECV_BUFFER)
 					if data:
 						# there is something in the socket
-						broadcast(server_socket, sock, "\r" + '[' + str(sock.getpeername()) + '] ' + data)
+						broadcast(server_socket, sock, '\r' + '[' + str(sock.getpeername()) + '] ' + data)
 					else:
 						# remove the socket that's broken    
 						if sock in SOCKET_LIST:
 							SOCKET_LIST.remove(sock)
 
 						# at this stage, no data means probably the connection has been broken
-						broadcast(server_socket, sock, "Client (%s, %s) is offline\n" % addr) 
+						broadcast(server_socket, sock, 'Client ({}, {}) is offline\n'.format(addr)) 
 
 				#exception 
 				except Exception as e:
@@ -54,10 +54,9 @@ def chat_server():
 						SOCKET_LIST.remove(sock)
 
 					# at this stage, no data means probably the connection has been broken
-					broadcast(server_socket, sock, "Client (%s, %s) is offline\n" % addr)
+					broadcast(server_socket, sock, 'Client ({}, {}) is offline\n'.format(addr))
 						
-					continue
-						
+					continue						
 	server_socket.close()
 
 # broadcast chat messages to all connected clients
