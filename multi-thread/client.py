@@ -1,11 +1,10 @@
-#!/usr/bin/python
-import threading, socket,sys
+import threading, socket, sys
 
 try: 
   c = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-  c.connect(('localhost',5300))
+  c.connect(('localhost', 5300))
   
-except socket.error, (value,message):
+except socket.error as message:
     if c:
       c.close()
     print('Couldn\'t open the socket {}'.format(message))
@@ -13,11 +12,11 @@ except socket.error, (value,message):
 
 
 while True:
-  data = raw_input('Enter data to send: ')   
+  data = input('Enter data to send: ')   
   if data == 'q' or data == 'Q':
-     c.send(data)
+     c.send(data.encode('utf-8'))
      break
-  c.send(data)
+  c.send(data.encode('utf-8'))
   print('Received data: {}'.format(c.recv(1024)))
 
 
