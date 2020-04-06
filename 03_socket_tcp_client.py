@@ -3,9 +3,9 @@ import socket
 import errno
 
 # deklarasi variabel
-IP="127.0.0.1"
-PORT=77
-PESAN="test 1 2 3"
+IP = '127.0.0.1'
+PORT = 77
+PESAN = 'test 1 2 3'
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 try:
@@ -20,7 +20,7 @@ try:
     karena server mengirim data terlebih dahulu,
     maka lebih baik receive dulu supaya tidak error
     '''
-    print 'pesan dari server: %s' % (sock.recv(1024))
+    print('pesan dari server: {}'.format(sock.recv(1024)))
     
     '''
     setelah menerima pesan dari server,
@@ -34,15 +34,15 @@ try:
     '''
 except socket.error as e:
     if e.errno == errno.ECONNREFUSED:
-        print 'gagal melakukan koneksi ke server'
+        print('gagal melakukan koneksi ke server')
     elif e.errno ==  errno.ECONNRESET:
-        print 'koneksi ke server terputus'
+        print('koneksi ke server terputus')
     elif e.errno == errno.ETIMEDOUT:
-        print 'koneksi timeout!'
+        print('koneksi timeout!')
     else:
-        print e
+        print(e)
 except Exception as e:
-    print e
+    print(e)
 finally:
     '''   
     close socket

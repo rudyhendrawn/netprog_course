@@ -1,9 +1,6 @@
-#!/usr/bin/env python
-# baca file
-
-filename = input("masukkan path file: ")
+filename = input('masukkan path file: ')
 try:
-    file = open(filename,'r')
+    file = open(filename, 'r')
     isi_file = file.readlines()
     file.close()
     
@@ -11,4 +8,4 @@ try:
         print (tiap_baris)
     
 except IOError:
-    print("Terjadi kesalahan: %s" % str(diag))
+    print('Terjadi kesalahan: {}'.format(str(diag)))

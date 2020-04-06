@@ -3,8 +3,8 @@
 import socket,errno,sys
 from _thread import *
 
-HOST=''
-PORT=1332
+HOST = ''
+PORT = 1332
 
 def clientTread(conn, addr):
     conn.send('Selamat datang di server Echo. Ketik sesuatu diakhiri dengan tombol ENTER\n')
@@ -14,7 +14,7 @@ def clientTread(conn, addr):
         if not data:
             break
         else:
-            print('Pesan dari %s : %s ' % (addr, data))
+            print('Pesan dari {}: {}'.format(addr, data))
             conn.sendall(data)
     
     conn.close()
@@ -43,9 +43,12 @@ def main():
             print('Terhubung dengan %s dari port %d' % (addr[0], addr[1]))
             start_new_thread(clientTread, (conn, addr[0], ))
         except socket.error as e: 
-            if e.errno == errno.ECONNREFUSED: print('gagal melakukan koneksi balik')
-            elif e.errno ==  errno.ECONNRESET: print('koneksi ke client terputus')
-            elif e.errno == errno.ETIMEDOUT: print('koneksi timeout!')
+            if e.errno == errno.ECONNREFUSED: 
+                print('gagal melakukan koneksi balik')
+            elif e.errno ==  errno.ECONNRESET: 
+                print('koneksi ke client terputus')
+            elif e.errno == errno.ETIMEDOUT: 
+                print('koneksi timeout!')
             else: print(e)    
         except KeyboardInterrupt:
             print('Server dimatikan')
