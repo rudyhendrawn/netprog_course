@@ -1,8 +1,3 @@
-
-#!/usr/bin/env python 
-""" 
-A simple echo client that handles some exceptions 
-""" 
 import socket 
 import sys 
 host = 'localhost' 

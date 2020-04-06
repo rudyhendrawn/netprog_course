@@ -1,8 +1,4 @@
-#!/usr/bin/env python 
-""" 
-A simple echo server that handles exceptions 
-""" 
-import socket,sys
+import socket, sys
 host = '' 
 port = 50000 
 backlog = 5 
