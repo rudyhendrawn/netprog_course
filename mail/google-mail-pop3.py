@@ -16,9 +16,6 @@ def download_email(username):
     mailbox.pass_(password) 
     num_messages = len(mailbox.list()[1])
     print ('Total emails: {}'.format(num_messages))
-    # print ('Getting last message')
-    # for msg in mailbox.retr(num_messages)[1]:
-    #     print (msg)
     mailbox.quit()
 
 if __name__ == '__main__':
