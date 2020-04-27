@@ -18,6 +18,11 @@ def on_subscribe(mosq, obj, mid, granted_qos):
 def on_log(mosq, obj, level, string):
     print(string)
 
+username = 'your username'
+password = 'your password'
+host_url = 'your cloud broker url'
+host_port = 'your cloud broker port' # do not type string, but change to integer
+
 mqttc = mqtt.Mosquitto()
 # Assign event callbacks
 mqttc.on_message = on_message
@@ -28,14 +33,13 @@ mqttc.on_subscribe = on_subscribe
 #mqttc.on_log = on_log
 
 # Parse CLOUDMQTT_URL (or fallback to localhost)
-url_str = os.environ.get('CLOUDMQTT_URL', 'mqtt://m12.cloudmqtt.com:12075')
+url_str = os.environ.get('CLOUDMQTT_URL', host_url)
 url = urlparse(url_str)
 
-# After you successfully the publisher and subscribe code, 
-# try to create your own MQTT broker by create an account at cloudmqtt.com
-
 # Connect
-mqttc.username_pw_set('dbkomngk', 'iWr3bpLbrojb')
+username = 'your username'
+password = 'your password'
+mqttc.username_pw_set(username, password)
 mqttc.connect(url.hostname, url.port)
 
 # Subscribe to a topic

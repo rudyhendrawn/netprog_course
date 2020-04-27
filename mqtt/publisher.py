@@ -16,10 +16,10 @@ Connected = False   #global variable for the state of the connection
 
 # After you successfully the publisher and subscribe code, 
 # try to create your own MQTT broker by create an account at cloudmqtt.com
-broker_address= 'm12.cloudmqtt.com'
-port = 12075
-user = 'dbkomngk'
-password = 'iWr3bpLbrojb'
+broker_address= 'your cloud broker url'
+port = 'your cloud broker port' # do not type string, but change to integer
+username = 'your username'
+password = 'your password'
  
 client = mqttClient.Client('Python')               #create new instance
 client.username_pw_set(user, password=password)    #set username and password
